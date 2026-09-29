@@ -1,132 +1,115 @@
-# 🎓 LearnLens AI — A RAG-Powered Personalized Study Assistant
-
-> **LearnLens AI** is a RAG-based personalized study assistant that allows students to upload study materials such as PDFs, textbooks, lecture notes, and PPTs. The system retrieves relevant information from the uploaded documents and uses an AI language model to provide context-based answers, simplified explanations, summaries, exam-oriented notes, and automatically generated quizzes. The system also provides source references to improve the reliability and transparency of the generated responses.
-
----
-
-## ✨ Features
-
-| Feature | Description |
-|---------|-------------|
-| 📄 **Multi-Format Upload** | Upload PDFs, PPTX, DOCX, and TXT files |
-| 💬 **AI Chat** | Ask questions and get context-based answers with source references |
-| 📋 **Smart Summaries** | Generate comprehensive summaries of your study materials |
-| 🎯 **Exam Notes** | Auto-generate concise, exam-oriented revision notes |
-| 💡 **Simplified Explanations** | Get complex topics explained in simple terms with analogies |
-| 🧠 **Auto Quizzes** | Generate MCQ quizzes with configurable difficulty and instant grading |
-| 🔍 **Semantic Search** | Search through your documents using natural language |
-| 📖 **Source References** | Every answer includes citations back to the original documents |
+<div align="center">
+  
+  # 🎓 LearnLens AI
+  ### A RAG-Powered Personalized Study Assistant
+  
+  [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://learnlens-ai-cshwmbrfareb3oajdzstan.streamlit.app/)
+  
+</div>
 
 ---
 
-## 🛠️ Tech Stack
+## 📖 Overview
 
-- **Frontend**: [Streamlit](https://streamlit.io/) — Interactive Python web UI
-- **LLM**: [Google Gemini 2.0 Flash](https://ai.google.dev/) — Fast, high-quality language model
-- **RAG Framework**: [LangChain](https://www.langchain.com/) — Orchestration of retrieval & generation
-- **Vector Store**: [FAISS](https://github.com/facebookresearch/faiss) — Efficient similarity search
-- **Embeddings**: Google Generative AI Embeddings (`embedding-001`)
-- **Document Parsing**: PyPDF2, python-pptx, python-docx
+**LearnLens AI** is an advanced Retrieval-Augmented Generation (RAG) study assistant designed to help students interact with their study materials intelligently. By uploading textbooks, lecture notes, PDFs, or presentations, students can instantly generate accurate summaries, exam-oriented notes, and automated quizzes—all grounded in their specific course material. 
+
+The application utilizes **Google's Gemini 3.8 Flash** model for high-speed, accurate generation, and local **HuggingFace** models for secure, fast vector embeddings.
 
 ---
 
-## 🚀 Getting Started
+## ✨ Key Features
 
-### Prerequisites
+- **📄 Multi-Format Document Support**: Upload multiple `.pdf`, `.pptx`, `.docx`, and `.txt` files simultaneously.
+- **💬 Conversational Chat (RAG)**: Ask complex questions about your documents and receive answers with precise source citations (page/slide numbers).
+- **📝 Automated Summarization**: Generate comprehensive, well-structured summaries of uploaded materials.
+- **🎯 Exam Notes Generator**: Extract key definitions, formulas, and concepts into rapid-revision study notes.
+- **💡 "ELI5" Mode**: Break down complex academic concepts into simple, easy-to-understand explanations using analogies.
+- **🧠 Intelligent Quiz Generator**: Automatically generate interactive Multiple Choice Question (MCQ) quizzes based on any topic found in your documents, complete with difficulty settings and automated grading.
+- **🎨 Premium UI/UX**: Built with a sleek, glassmorphism-inspired dark theme, interactive animations, and responsive design.
 
-- Python 3.9+
-- A Google Gemini API key (free at [aistudio.google.com](https://aistudio.google.com/apikey))
+---
 
-### Installation
+## 🛠️ Architecture & Tech Stack
 
+LearnLens AI is built on a modern, robust AI stack:
+
+* **Frontend**: [Streamlit](https://streamlit.io/) (with custom CSS/HTML injection for premium styling)
+* **LLM Engine**: [Google Gemini 3.8 Flash](https://ai.google.dev/) (via `langchain-google-genai`)
+* **Embeddings**: Local HuggingFace `all-MiniLM-L6-v2` (via `sentence-transformers`) - *chosen for zero API latency and rate-limit immunity.*
+* **Vector Database**: [FAISS](https://github.com/facebookresearch/faiss) (Facebook AI Similarity Search)
+* **Orchestration**: [LangChain](https://www.langchain.com/)
+
+---
+
+## 🚀 Live Demo
+
+You can try the live application here:  
+**👉 [LearnLens AI - Streamlit Cloud](https://learnlens-ai-cshwmbrfareb3oajdzstan.streamlit.app/)**
+
+*(Note: You will need a free Google Gemini API key to use the application).*
+
+---
+
+## 💻 Local Installation
+
+To run this project locally on your machine, follow these steps:
+
+### 1. Clone the repository
 ```bash
-# 1. Clone the repository
-git clone https://github.com/your-username/LearnLens-AI.git
+git clone https://github.com/PriyangshuSaha1/LearnLens-AI.git
 cd LearnLens-AI
+```
 
-# 2. Create a virtual environment
+### 2. Set up a Virtual Environment
+```bash
 python -m venv venv
-source venv/bin/activate      # Linux/Mac
-venv\Scripts\activate         # Windows
 
-# 3. Install dependencies
+# Windows
+venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
-# 4. Run the app
+### 4. Run the Application
+```bash
 streamlit run app.py
 ```
 
-### Configuration
+---
 
-You can provide your Gemini API key in two ways:
-1. **In the app**: Enter it in the sidebar text input (recommended for quick use)
-2. **Environment variable**: Create a `.env` file from the example:
-   ```bash
-   cp .env.example .env
-   # Edit .env and add your API key
+## 🔑 Configuration
+
+To utilize the generative features, you must provide a Google Gemini API Key. 
+1. Get a free API key from **[Google AI Studio](https://aistudio.google.com/apikey)**.
+2. You can input the key directly into the secure sidebar of the web app.
+3. Alternatively, create a `.env` file in the root directory for local development:
+   ```env
+   GOOGLE_API_KEY="your_api_key_here"
    ```
 
 ---
 
 ## 📁 Project Structure
 
-```
+```text
 LearnLens-AI/
-├── app.py                      # Main Streamlit application
-├── requirements.txt            # Python dependencies
-├── Procfile                    # Render deployment config
-├── render.yaml                 # Render blueprint
-├── .env.example                # Environment variables template
-├── .gitignore
-├── .streamlit/
-│   └── config.toml             # Streamlit theme & server config
+├── app.py                      # Main Streamlit UI & Application Logic
+├── requirements.txt            # Project dependencies
 ├── utils/
-│   ├── __init__.py
-│   ├── document_loader.py      # PDF, PPTX, DOCX, TXT extraction
-│   ├── text_splitter.py        # Document chunking
-│   ├── embeddings.py           # Google AI embeddings & FAISS
-│   ├── rag_chain.py            # RAG chains (chat, explain, summary, exam)
-│   └── quiz_generator.py       # MCQ quiz generation
-└── README.md
+│   ├── document_loader.py      # Parses PDF, PPTX, DOCX, and TXT files
+│   ├── text_splitter.py        # LangChain RecursiveCharacterTextSplitter
+│   ├── embeddings.py           # FAISS vector store & HuggingFace embeddings
+│   ├── rag_chain.py            # Custom prompt templates & Gemini 3.8 logic
+│   └── quiz_generator.py       # JSON-structured Gemini quiz generation
+└── README.md                   # Project documentation
 ```
 
 ---
-
-## 📖 Usage Guide
-
-1. **Enter API Key** — Paste your Google Gemini API key in the sidebar
-2. **Upload Documents** — Upload one or more PDF, PPTX, DOCX, or TXT files
-3. **Process** — Click "Process Documents" to create the vector index
-4. **Chat** — Ask questions in the Chat tab and get answers with citations
-5. **Summary & Notes** — Generate summaries, exam notes, or simplified explanations
-6. **Quiz** — Pick a topic, set difficulty, and take an auto-generated quiz
-7. **Search** — Use semantic search in the Documents tab
-
----
-
-## 🌐 Deployment
-
-### Streamlit Cloud (Free)
-
-1. Push your code to GitHub
-2. Go to [share.streamlit.io](https://share.streamlit.io)
-3. Connect your repo and deploy
-4. Add `GOOGLE_API_KEY` in Streamlit secrets
-
-### Render
-
-1. Push your code to GitHub
-2. Go to [render.com](https://render.com) → New Web Service
-3. Connect your repo
-4. Render will auto-detect the `render.yaml` or use the Procfile
-5. Add `GOOGLE_API_KEY` as an environment variable
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-<p align="center">Built with ❤️ using Streamlit, LangChain & Google Gemini</p>
+<div align="center">
+  <p><i>Built for educational purposes.</i></p>
+</div>
