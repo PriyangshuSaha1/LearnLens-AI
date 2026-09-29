@@ -99,7 +99,7 @@ def get_qa_chain(retriever, mode: str = "chat") -> RetrievalQA:
     """
     api_key = _get_api_key()
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash",
+        model="gemini-3.8-flash",
         google_api_key=api_key,
         temperature=0.3,
         convert_system_message_to_human=True,

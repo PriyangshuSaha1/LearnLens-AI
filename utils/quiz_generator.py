@@ -76,7 +76,7 @@ Return ONLY the JSON array, no other text. Example format:
 
     api_key = _get_api_key()
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.0-flash",
+        model="gemini-3.8-flash",
         google_api_key=api_key,
         temperature=0.7,
     )
