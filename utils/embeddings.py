@@ -1,40 +1,21 @@
 """
 Embeddings & Vector Store Module for LearnLens AI.
-Creates FAISS vector stores from document chunks using Google Generative AI embeddings.
+Creates FAISS vector stores from document chunks using HuggingFace local embeddings.
 """
 
 import os
 from typing import List
 
 from langchain_core.documents import Document
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
-
-def _get_api_key() -> str:
-    """Retrieve the Gemini API key from session state or environment."""
-    try:
-        import streamlit as st
-        key = st.session_state.get("gemini_api_key", "")
-        if key:
-            return key
-    except Exception:
-        pass
-    return os.environ.get("GOOGLE_API_KEY", "")
-
-
-def get_embeddings() -> GoogleGenerativeAIEmbeddings:
+def get_embeddings() -> HuggingFaceEmbeddings:
     """
-    Return a GoogleGenerativeAIEmbeddings instance.
-
-    Returns:
-        An embeddings object configured with the Gemini API key.
+    Return a HuggingFaceEmbeddings instance.
+    Uses the lightweight and fast all-MiniLM-L6-v2 model.
     """
-    api_key = _get_api_key()
-    return GoogleGenerativeAIEmbeddings(
-        model="text-embedding-004",
-        google_api_key=api_key,
-    )
+    return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 
 def create_vector_store(chunks: List[Document]) -> FAISS:
