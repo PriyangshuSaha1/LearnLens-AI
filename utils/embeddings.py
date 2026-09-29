@@ -32,7 +32,7 @@ def get_embeddings() -> GoogleGenerativeAIEmbeddings:
     """
     api_key = _get_api_key()
     return GoogleGenerativeAIEmbeddings(
-        model="models/text-embedding-004",
+        model="text-embedding-004",
         google_api_key=api_key,
     )
 
